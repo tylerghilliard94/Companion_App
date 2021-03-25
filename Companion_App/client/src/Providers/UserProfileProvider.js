@@ -65,16 +65,18 @@ export function UserProfileProvider(props) {
 
   const getUserProfile = (firebaseUserId) => {
 
-    return getToken().then((token) => {
-      debugger
+    return getToken().then((token) =>
+
       fetch(`${apiUrl}/${firebaseUserId}`, {
 
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`
         }
-      }).then(resp => resp.json())
-    });
+      }).then((resp) => {
+        debugger
+        return resp.json()
+      }));
   };
 
   const saveUser = (userProfile) => {
