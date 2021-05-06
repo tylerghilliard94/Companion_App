@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import { Button, Row, Col, Spinner } from "reactstrap";
+import { UserProfileContext } from "../Providers/UserProfileProvider"
 
 
 
@@ -12,7 +13,11 @@ import { Button, Row, Col, Spinner } from "reactstrap";
 
 export default function Home() {
 
+    const { getBlizzToken, test } = useContext(UserProfileContext);
 
+    useEffect(() => {
+        getBlizzToken().then((response) => sessionStorage.setItem("token", response.access_token)).then(() => test())
+    }, [])
 
     return (
         <>

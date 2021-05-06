@@ -8,6 +8,7 @@ import { createBrowserHistory } from 'history';
 
 function App() {
   const history = createBrowserHistory();
+
   return (
     <Router history={history}>
       <UserProfileProvider>
