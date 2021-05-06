@@ -20,7 +20,7 @@ export default function ApplicationViews(props) {
           <Login />
         </Route>
         <Route path="/home">
-          {isLoggedIn ? <Home /> : <Redirect to="/" />}
+          <Home />
         </Route>
 
         <Route path="/register">

@@ -3,6 +3,7 @@ import { Spinner } from "reactstrap";
 import firebase from "firebase/app";
 import "firebase/auth";
 
+
 export const UserProfileContext = createContext();
 
 export function UserProfileProvider(props) {
@@ -62,7 +63,52 @@ export function UserProfileProvider(props) {
   };
 
   const getToken = () => firebase.auth().currentUser.getIdToken();
+  const getBlizzToken = async () => {
 
+    const basicAuth = btoa(`${process.env.REACT_APP_CLIENT_ID}:${process.env.REACT_APP_CLIENT_SECRET}`);
+    const grantType = sessionStorage.getItem("accessCode")
+    const resp = await fetch(`https://us.battle.net/oauth/token`, {
+
+      method: "POST",
+      body: 'developer_client_id=' + process.env.REACT_APP_CLIENT_SECRET + '&redirect_uri=http://localhost:3000/home' + '&grant_type=authorization_code' + '&code=' + grantType,
+
+      headers: {
+        authorization: `Basic ${basicAuth}`,
+        'Content-Type': 'application/x-www-form-urlencoded'
+
+
+      },
+
+    })
+
+    const token = await resp.json();
+    return token
+
+
+  };
+
+  const test = async () => {
+
+
+
+    const response = await fetch(`https://render-us.worldofwarcraft.com/character/proudmoore/146/231512978-avatar.jpg?alt=/shadow/avatar/2-1.jpg`, {
+
+      method: "GET",
+      mode: "no-cors",
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+
+
+      },
+
+    })
+    debugger
+    // const creature = await response.json()
+    console.log(response)
+    return response
+
+
+  };
   const getUserProfile = (firebaseUserId) => {
 
     return getToken().then((token) =>
@@ -145,7 +191,7 @@ export function UserProfileProvider(props) {
 
 
   return (
-    <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register, getToken, userProfile, activeUser, getAllUserProfiles, allUserProfiles, getUserProfileById, singleUserProfile, editUserProfile, deleteUserProfile }}>
+    <UserProfileContext.Provider value={{ isLoggedIn, getBlizzToken, login, test, logout, register, getToken, userProfile, activeUser, getAllUserProfiles, allUserProfiles, getUserProfileById, singleUserProfile, editUserProfile, deleteUserProfile }}>
       {isFirebaseReady
         ? props.children
         : <Spinner className="app-spinner dark" />}
