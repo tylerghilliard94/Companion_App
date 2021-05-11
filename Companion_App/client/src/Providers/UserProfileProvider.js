@@ -86,7 +86,7 @@ export function UserProfileProvider(props) {
 
 
   };
-
+  // Test to make sure I can pull data from the BattleNet API
   const test = async () => {
 
 
