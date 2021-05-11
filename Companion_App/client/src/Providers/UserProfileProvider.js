@@ -86,7 +86,7 @@ export function UserProfileProvider(props) {
 
 
   };
-
+  // Test to make sure I can pull data from the BattleNet API
   const test = async () => {
 
 
@@ -102,9 +102,9 @@ export function UserProfileProvider(props) {
       },
 
     })
-    debugger
+
     // const creature = await response.json()
-    console.log(response)
+
     return response
 
 
@@ -120,7 +120,7 @@ export function UserProfileProvider(props) {
           Authorization: `Bearer ${token}`
         }
       }).then((resp) => {
-        debugger
+
         return resp.json()
       }));
   };
