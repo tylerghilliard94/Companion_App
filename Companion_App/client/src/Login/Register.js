@@ -106,28 +106,7 @@ export default function Register() {
                 <Row><Button className="UploadPictureButton" onClick={showWidget}><strong>Upload Photo</strong></Button> <p>{imageName}</p></Row>
               </div>
             </FormGroup>
-            {/* <FormGroup>
 
-              <Label className="PrimaryFocusTitle" for="primaryfocus">Primary Focus</Label>
-              {primaryFoci != undefined ?
-                <select
-                  className="RegisterPrimaryFocus"
-
-                  onChange={e => setPrimaryFocusId(parseInt(e.target.value))}
-                  defaultValue={1}
-                  id="primaryFocusId"
-
-                >
-                  {primaryFoci.map(primaryFocus => {
-
-                    return <option key={primaryFocus.id} value={primaryFocus.id}>{primaryFocus.name}</option>
-
-
-                  })}
-
-                </select> : null
-              }
-            </FormGroup> */}
             <FormGroup>
               <Button className="RegisterConfirmButton"><strong>Register</strong></Button>
             </FormGroup>
